@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>登录界面</title>
+    </head>
+    <body>
+        <table border=" solid 2px" align="center">
+            <caption>医生排班(最近时间升序)</caption>
+            <tr>
+                <td>时间序号</td>
+                <td>姓名</td>
+                <td>工作地点</td>
+                <td>上班时间</td>
+                <td>下班时间</td>
+                <td></td>
+            </tr>
+            <form action="https://127.0.0.1:443/doctorschedule_add" method="post" enctype="application/x-www-form-urlencoded">
+                <tr>
+                    <td><input type="text" value="------占位------" readonly></td>
+                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="addr"></td>
+                    <td><input type="datetime-local" name="timeup"></td>
+                    <td><input type="datetime-local" name="timedown"></td>
+                    <td><input type="submit" value="添加"></td>
+                </tr>
+            </form>
+            <!--insert_mark-->
+        </table>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>入院登记</title>
+    </head>
+    <body>
+        <form action="/hospitalin_add" enctype="application/x-www-form-urlencoded" method="post">
+        <table align="center" border=" solid 2px">
+            <caption>入院登记</caption>
+            <tr>
+                <td>姓名<input type="text" name="name"></td>
+                <td>年龄<input type="text" name="age"></td>
+            </tr>
+            <tr>
+                <td>楼层<input type="text" name="floor"></td>
+                <td>床位<input type="text" name="bed"></td>
+            </tr>
+            <tr>
+                <td colspan="2">科室<input type="text" name="department"></td>
+            </tr>
+            <tr>
+                <td>主任医师<input type="text" name="doctorname"></td>
+                <td>护士长<input type="text" name="nursename"></td>
+            </tr>
+            <tr>
+                <td>住址<input type="text" name="addr"></td>
+                <td> 性别
+                    <input type="radio" name="sex" value="man">男
+                    <input type="radio" name="sex" value="woman">女
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   联系方式<input type="text" name="phone">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    入院原因
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                   <Textarea style="width: 100%; height: 300px; box-sizing: border-box;" name="reason" ></Textarea>
+                </td>
+            </tr>
+            <tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="登记">
+					<input type="submit" value="取消">
+				</td>
+			</tr>
+           
+        </table>
+    </form>
+    </body>
+</html>

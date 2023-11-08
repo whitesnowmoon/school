@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>注册界面</title>
+	</head>
+	<body>
+		<form action="https://127.0.0.1:443/login_pwd" name="login_pwd" method="post">
+		<table align="center" border=" solid 2px">
+			<caption>注册界面</caption>
+			<tr>
+				<td>用户名:</td>
+				<td><input type="username" name="username" size="30" maxlength="20"></td>
+			</tr>
+			<tr>
+				<td>密码:</td>
+				<td><input  type="password" name="password" size="30" maxlength="20"></td>
+			</tr>
+            <tr>
+				<td colspan="2" align="center">权限</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="radio"  name="authority" value="root">root
+					<input type="radio" name="authority" value="manager">管理员
+					<input type="radio" name="authority" value="nurse">护士
+					<input type="radio" name="authority" value="doctor">医生
+					<input type="radio" name="authority" value="patient" checked>外来人员
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="注册">
+                    <button type="reset">取消</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</body>
+</html>

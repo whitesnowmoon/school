@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>药品发放</title>
+        <script>
+            function addRow(){
+                let newrow=document.createElement('tr');
+                newrow.innerHTML='<td>名称<input  name="name" type="text"></td>'+
+                                '<td>数量<input name="count" type="text" value="0">'
+                let table=document.getElementById('table');
+                table.appendChild(newrow);
+
+            }
+        </script>
+    </head>
+    <body >
+        <form action="https://127.0.0.1/drugout_add" method="post" enctype="application/x-www-form-urlencoded">
+            <div style="display: grid;"></div>
+            <table border=" solid 2px" align="center" style="width: 600px;" id="table">
+                <caption>药品发放</caption>
+                <tr>
+                    <td>接受人<input name="patient" type="text"></td>
+                    <td>发放人<input name="head" type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">发放日期<input name="outputdate" type="date"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center">
+                        <input type="submit" value="提交">
+                        <button type="button" onclick="addRow()">新增</button>
+                        <input type="submit" value="取消">
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称<input name="name" type="text"></td>
+                    <td>数量<input name="count" type="text" value="0"></td>
+                 </tr>
+            </table>
+        </form>
+
+    </body>
+</html>

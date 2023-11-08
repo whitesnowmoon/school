@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>药品采购</title>
+    </head>
+    <body >
+        <form action="https://127.0.0.1/drugin_add" method="post" enctype="application/x-www-form-urlencoded">
+            <div style="display: grid;"></div>
+            <table border=" solid 2px" align="center" style="width: 600px;" id="table">
+                <caption>药品采购</caption>
+                <tbody>
+                <tr>
+                    <td colspan="2">负责人<input name="head" type="text"></td>
+                    <td colspan="3">采购日期<input name="inputdate" type="date"></td>
+                </tr>
+                <tr>
+                   <td>名称<input name="name" type="text"></td>
+                   <td>数量<input name="count" type="text" value="0"></td>
+                   <td>生产日期<input name="effectivedate" type="date"></td>
+                   <td>有效日期<input name="productiondate" type="date"></td>
+                   <td>购买商家<input name="business" type="text"></td>
+                </tr>
+                </tbody>
+                <tr>
+                    <td colspan="5" align="center">
+                        <input type="submit" value="提交">
+                        <input type="submit" value="取消">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>
