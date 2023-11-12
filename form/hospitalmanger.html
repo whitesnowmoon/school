@@ -8,6 +8,15 @@
         <table border=" solid 2px" align="center" style="width: 600px;">
                 <caption>住院管理</caption>
                 <tr>
+                    <td colspan="7">
+                        <form action="/hospital_msg" enctype="application/x-www-form-urlencoded" method="post">
+                            姓名<input type="text" name="name"> 
+                            部门<input type="text" name="department">
+                            <input type="submit" value="搜索">
+                        </form>
+                    </td>
+                </tr>
+                <tr>
                     <td>楼层</td>
                     <td>科室</td>
                     <td>床位</td>

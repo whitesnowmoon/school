@@ -6,8 +6,8 @@
 
 #define INDEX_ROOT_HTML  u8"<a href=\"web3.html\" >挂号管理</a><br>"\
                            "<a href=\"/doctorschedule\" >医生排班管理</a><br>"\
-                           "<a href=\"web3.html\" >医生处方管理</a><br>"\
-                           "<a href=\"web3.html\" >手术管理</a><br>"\
+                           "<a href=\"/prescription\" >医生处方管理</a><br>"\
+                           "<a href=\"/operation\" >手术管理</a><br>"\
                            "<a href=\"/nurseschedule\" >护S士工作站管理</a><br>"\
                            "<a href=\"/hospitalin\" >入院登记</a><br>"\
                            "<a href=\"/hospitalmanger\" >住院管理</a><br>"\

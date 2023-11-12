@@ -5,20 +5,20 @@
             <title>手术管理</title>
         </head>
         <body>
-            <form action="" name="register" method="get">
+            <form action="/operation_add" method="post" enctype="application/x-www-form-urlencoded">
             <table align="center" border=" solid 2px">
                 <caption>手术管理</caption>
                 <tr>
-                    <td>患者姓名<input type="text"></td>
-                    <td>患者年龄<input type="text"></td>
-                    <td>主刀医生<input type="text"></td>
-                    <td>手术地点<input type="text"></td>
+                    <td>患者姓名<input type="text" name="name"></td>
+                    <td>患者年龄<input type="text" name="age"></td>
+                    <td>主刀医生<input type="text" name="doctor"></td>
+                    <td>手术地点<input type="text" name="addr"></td>
                 </tr>
                 <tr>
                     <td colspan="4" align="center">开始时间 </td>
                 </tr>
                 <tr>
-                    <td colspan="4" align="center"><input type="datetime-local"> </td>
+                    <td colspan="4" align="center"><input type="datetime-local" name="time"> </td>
                 </tr>
                 <tr>
                     <td colspan="4" align="center">
@@ -27,20 +27,14 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                       <Textarea style="width: 100%; height: 300px; box-sizing: border-box;" ></Textarea>
+                       <Textarea style="width: 100%; height: 300px; box-sizing: border-box;" name="process"></Textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td>医生助手1<input type="text"></td>
-                    <td>医生助手2<input type="text"></td>
-                    <td>医生助手3<input type="text"></td>
-                    <td>医生助手4<input type="text"></td>
-                </tr>
-                <tr>
-                    <td>医生助手5<input type="text"></td>
-                    <td>医生助手6<input type="text"></td>
-                    <td>医生助手7<input type="text"></td>
-                    <td>医生助手8<input type="text"></td>
+                    <td>医生助手1<input type="text" name="assistant1"></td>
+                    <td>医生助手2<input type="text" name="assistant2"></td>
+                    <td>医生助手3<input type="text" name="assistant3"></td>
+                    <td>医生助手4<input type="text" name="assistant4"></td>
                 </tr>
                 <tr>
                     <td align="center" colspan="4">

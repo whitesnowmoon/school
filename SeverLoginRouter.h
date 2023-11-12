@@ -414,12 +414,92 @@ public:
 		{
 			return Router_doctorschedule_delete(http);
 		}
+		/***********11/12补丁**************/
+		else if (http.url == "/operation" && http.method == "GET")   //手术管理表单发送
+		{
+			return Router_operation(http);
+		}
+
+		else if (http.url == "/operation_add" && http.method == "POST") //手术管理表单提交
+		{
+			return Router_operation_add(http);
+		}
+
+		else if (http.url == "/prescription" && http.method == "GET")
+		{
+			return Router_prescription(http);
+		}
+		else if (http.url == "/prescription_add" && http.method == "POST")
+		{
+			return Router_prescription_add(http);
+		}
+		/*************************/
 		//下一次开发从这里开始,开始具体业务处理   2023/10/26
 		//承接判断开始，会传入http, cookie，以无路径404结束
 		SeverNurseRouter nurseschedule;
 		nurseschedule.next(http, cookie);
 	}
 private:
+	int Router_operation(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/operation.html");
+		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_operation_add(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		Operation_Database db;
+		if (db.AddData(http.urlcontent) == 0) {
+			respond.AddContent("inputin");
+		}
+		else
+		{
+			respond.AddContent("error!");
+		}
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_prescription(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/prescription.html");
+		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_prescription_add(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		Prescription_Database db;
+		if (db.AddData(http.urlcontent) == 0) {
+			respond.AddContent("inputin");
+		}
+		else
+		{
+			respond.AddContent("error!");
+		}
+		int res = respond.Send();
+		return res;
+	}
+
 	int Router_doctorschedule(SeverRequest& http) {
 		SeverRespond respond(http.httpIterator);
 		respond.protocol = http.protocol;

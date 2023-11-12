@@ -504,12 +504,66 @@ public:
 		sqlite3_finalize(stmt);
 		return 0;
 	}
-private:
-	long long time_str(std::string strTime) {
-		int year, month, day;
-		sscanf(strTime.c_str(), "%d-%d-%d", &year, &month, &day);
-		return year * 10000 + month * 100 + day;
+};
+
+
+//Operation表
+class Operation_Database :public SeverDatabase
+{
+public:
+	int AddData(std::map<std::string, std::string> data) {    //正确返回0 错误-1
+		sqlite3_stmt* stmt;
+		int res = sqlite3_prepare(this->db, "insert into operation(name,age,doctor,assistant1,assistant2,assistant3,assistant4,time,process,addr) values (?,?,?,?,?,?,?,?,?,?);", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_int(stmt, 2, std::atoi(data["age"].c_str()));
+			sqlite3_bind_text(stmt, 3, data["doctor"].c_str(), data["doctor"].size(), NULL);
+			sqlite3_bind_text(stmt, 4, data["assistant1"].c_str(), data["assistant1"].size(), NULL);
+			sqlite3_bind_text(stmt, 5, data["assistant2"].c_str(), data["assistant2"].size(), NULL);
+			sqlite3_bind_text(stmt, 6, data["assistant3"].c_str(), data["assistant3"].size(), NULL);
+			sqlite3_bind_text(stmt, 7, data["assistant4"].c_str(), data["assistant4"].size(), NULL);
+			sqlite3_bind_text(stmt, 8, data["time"].c_str(), data["time"].size(), NULL);
+			sqlite3_bind_text(stmt, 9, data["process"].c_str(), data["process"].size(), NULL);
+			sqlite3_bind_text(stmt, 10, data["addr"].c_str(), data["addr"].size(), NULL);
+			res = sqlite3_step(stmt);
+			if (res != SQLITE_DONE) {
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+		}
+		sqlite3_finalize(stmt);
+		return 0;
 	}
 };
+
+
+//prescription表
+class Prescription_Database :public SeverDatabase
+{
+public:
+	int AddData(std::map<std::string, std::string> data) {    //正确返回0 错误-1
+		sqlite3_stmt* stmt;
+		int res = sqlite3_prepare(this->db, "insert into prescription(name,sex,age,time,addr,phone,hospitalname,doctorname,text) values (?,?,?,?,?,?,?,?,?);", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_text(stmt, 2, data["sex"].c_str(), data["sex"].size(), NULL);
+			sqlite3_bind_int(stmt, 3, std::atoi(data["age"].c_str()));
+			sqlite3_bind_text(stmt, 4, data["time"].c_str(), data["time"].size(), NULL);
+			sqlite3_bind_text(stmt, 5, data["addr"].c_str(), data["addr"].size(), NULL);
+			sqlite3_bind_text(stmt, 6, data["phone"].c_str(), data["phone"].size(), NULL);
+			sqlite3_bind_text(stmt, 7, data["hospitalname"].c_str(), data["hospitalname"].size(), NULL);
+			sqlite3_bind_text(stmt, 8, data["doctorname"].c_str(), data["doctorname"].size(), NULL);
+			sqlite3_bind_text(stmt, 9, data["text"].c_str(), data["text"].size(), NULL);
+			res = sqlite3_step(stmt);
+			if (res != SQLITE_DONE) {
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+		}
+		sqlite3_finalize(stmt);
+		return 0;
+	}
+};
+
 #endif // !_SEVERDATABASE_H_
 
