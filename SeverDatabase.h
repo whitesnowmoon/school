@@ -565,5 +565,47 @@ public:
 	}
 };
 
+//register表
+class Register_Database :public SeverDatabase
+{
+public:
+	int AddData(std::map<std::string, std::string> data) {    //正确返回0 错误-1
+		sqlite3_stmt* stmt;
+		int res = sqlite3_prepare(this->db, "insert into register(username,age,addr,department,doctor,phone,time,id) values (?,?,?,?,?,?,?,?);", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["username"].c_str(), data["username"].size(), NULL);
+			sqlite3_bind_int(stmt, 2, std::atoi(data["age"].c_str()));
+			sqlite3_bind_text(stmt, 3, data["addr"].c_str(), data["addr"].size(), NULL);
+			sqlite3_bind_text(stmt, 4, data["department"].c_str(), data["department"].size(), NULL);
+			sqlite3_bind_text(stmt, 5, data["doctor"].c_str(), data["doctor"].size(), NULL);
+			sqlite3_bind_text(stmt, 6, data["phone"].c_str(), data["phone"].size(), NULL);
+			sqlite3_bind_text(stmt, 7, data["time"].c_str(), data["time"].size(), NULL);
+			sqlite3_bind_int64(stmt, 8, time_str(data["time"]));
+			res = sqlite3_step(stmt);
+			if (res != SQLITE_DONE) {
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+		}
+		sqlite3_finalize(stmt);
+		return 0;
+	}
+private:
+	long long time_str(std::string strTime) {
+		tm _tm;
+		int year, month, day, hour, minute;
+		sscanf(strTime.c_str(), "%d-%d-%dT%d:%d", &year, &month, &day, &hour, &minute);
+		_tm.tm_year = year - 1900;
+		_tm.tm_mon = month - 1;
+		_tm.tm_mday = day;
+		_tm.tm_hour = hour;
+		_tm.tm_min = minute;
+		_tm.tm_sec = 0;
+		_tm.tm_isdst = 0;
+		time_t t = mktime(&_tm);
+		return t;
+	}
+};
+
 #endif // !_SEVERDATABASE_H_
 

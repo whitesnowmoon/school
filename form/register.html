@@ -5,36 +5,35 @@
 		<title>挂号单</title>
     </head>
     <body>
-        <form action="" name="register" method="get">
+        <form action="/register_add" name="register" method="post">
         <table align="center" border=" solid 2px">
             <caption>挂号单</caption>
             <tr>
-                <td>姓名<input type="text"></td>
-                <td>年龄<input type="text"></td>
+                <td>姓名<input type="text" name="username"></td>
+                <td>年龄<input type="text" name="age"></td>
             </tr>
             <tr>
-                <td>住址<input type="text"></td>
-                <td>电话<input type="text"></td>
+                <td>住址<input type="text" name="addr"></td>
+                <td>电话<input type="text" name="phone"></td>
             </tr>
             <tr>
                 <td>      
-                    科室<select name="year" id="year">
+                    科室<select name="department">
                     <option value="0" selected>------选择------</option>
                     <option value="2020">儿童科</option>
                     <option value="2021">肠胃科</option>
                     </select>
                 </td>
                 <td>
-                    医生<select name="year" id="year">
-                    <option value="0" selected>------选择------</option>
-                    <option value="2020">儿童科</option>
-                    <option value="2021">肠胃科</option>
-                    </select> 
+                    特约医生<input type="text" name="doctor" value="null">
                 </td>
             </tr>
             <tr>
+                <td>时间<input type="datetime-local" name="time"></td>
+            </tr>
+            <tr>
 				<td colspan="2" align="center">
-					<input type="submit" value="登录">
+					<input type="submit" value="提交">
 					<input type="submit" value="取消">
 				</td>
 			</tr>

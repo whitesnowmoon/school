@@ -6,6 +6,51 @@
 #include"SeverDatabase.h"
 #include"SeverConst.h"
 #include<list>
+class SeverRegister
+{
+public:
+	int next(SeverRequest& http, std::string cookie) {
+		if (http.url == "/register" && http.method == "GET")//权限进入
+		{
+			return Router_register(http);
+		}
+		if (http.url == "/register_add" && http.method == "POST")//权限进入
+		{
+			return Router_register_add(http);
+		}
+		//下一次开发从这里开始,开始具体业务处理   2023/11/13
+		//承接判断开始，会传入http, cookie，以无路径404结束
+	}
+private:
+	int Router_register_add(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		Register_Database db;
+		if (db.AddData(http.urlcontent) == 0) {
+			respond.AddContent("inputin");
+		}
+		else
+		{
+			respond.AddContent("error!");
+		}
+		int res = respond.Send();
+		return res;
+	}
+	int Router_register(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/register.html");
+		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+};
 
 class SeverHospital
 {
@@ -37,6 +82,8 @@ public:
 		}
 		//下一次开发从这里开始,开始具体业务处理   2023/11/8
 		//承接判断开始，会传入http, cookie，以无路径404结束
+		SeverRegister Register;
+		Register.next(http, cookie);
 	}
 private:
 	int Router_hospitalin(SeverRequest& http) {
@@ -388,7 +435,6 @@ private:
 		return res;
 	}
 };
-
 
 
 
