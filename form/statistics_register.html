@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>挂号单</title>
+    </head>
+    <body>
+        <table border=" solid 2px" align="center">
+            <caption>挂号单(最近时间排序)</caption>
+            <tr>
+                <td colspan="4">
+                    <form action="/statistics_register_msg" enctype="application/x-www-form-urlencoded" method="post">
+                        姓名<input type="text" name="username"> 
+                        部门<input type="text" name="department">
+                        <input type="submit" value="搜索">
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td>部门</td>
+                <td>时间</td>
+                <td>---占位---</td>
+            </tr>
+            <!--insert_mark-->
+        </table>
+    </body>
+</html>

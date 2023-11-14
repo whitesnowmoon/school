@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>医生处方</title>
+    </head>
+    <body>
+            <table border=" solid 2px" align="center" style="width: 600px;">
+                <caption>医生处方</caption>
+                <tr>
+                    <td>姓名 <input type="text" name="name" value="%s"></td>
+                    <td>性别
+                        <input type="text" name="sex" value="%s">
+                    </td>
+                    <td>年龄 <input type="text" name="age" value="%s"></td>
+                    <td>日期 <input type="text" name="time" value="%s"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">住址 <input type="text" name="addr" value="%s"></td>
+                    <td colspan="2">电话 <input type="text" name="phone" value="%s"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">医院名称 <input type="text" name="hospitalname" value="%s"></td>
+                    <td colspan="2">医生姓名 <input type="text" name="doctorname" value="%s"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        处方
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                       <Textarea style="width: 100%; height: 300px; box-sizing: border-box;" name="text">%s</Textarea>
+                    </td>
+                </tr>
+            </table>
+
+    </body>
+</html>

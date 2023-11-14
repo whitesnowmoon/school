@@ -18,6 +18,35 @@ public:
 		{
 			return Router_register_add(http);
 		}
+		/*************/
+		if (http.url == "/statistics" && http.method == "GET")//权限进入
+		{
+			return Router_statistics(http);
+		}
+		if (http.url == "/statistics/statistics_operation" && http.method == "GET")//权限进入
+		{
+			return Router_statistics_operation(http);
+		}
+		if (http.url == "/statistics_operation_msg" && http.method == "POST")//权限进入
+		{
+			return Router_statistics_operation_msg(http);
+		}
+		if (http.url == "/statistics/statistics_register" && http.method == "GET")//权限进入
+		{
+			return Router_statistics_register(http);
+		}
+		if (http.url == "/statistics_register_msg" && http.method == "POST")//权限进入
+		{
+			return Router_statistics_register_msg(http);
+		}
+		if (http.url == "/statistics/statistics_prescription" && http.method == "GET")//权限进入
+		{
+			return Router_statistics_prescription(http);
+		}
+		if (http.url == "/statistics_prescription_msg" && http.method == "POST")//权限进入
+		{
+			return Router_statistics_prescription_msg(http);
+		}
 		//下一次开发从这里开始,开始具体业务处理   2023/11/13
 		//承接判断开始，会传入http, cookie，以无路径404结束
 	}
@@ -46,6 +75,121 @@ private:
 		SeverFile file;
 		file.SeverFile_open("form/register.html");
 		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics.html");
+		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics_operation(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_operation.html");
+		std::string content = file.GetContent();
+		std::string mark = "<!--insert_mark-->";
+		int pos = content.find(mark);
+		pos += mark.size();
+		Operation_Database db;
+		std::string addurl = db.GetDataS();
+		content.insert(pos, addurl);
+		respond.AddContent(content);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics_operation_msg(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_operation_msg.html");
+		std::string content = file.GetContent();
+		Operation_Database db;
+		std::string addurl = db.GetDataOne(http.urlcontent, content);
+		respond.AddContent(addurl);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics_register(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_register.html");
+		std::string content = file.GetContent();
+		std::string mark = "<!--insert_mark-->";
+		int pos = content.find(mark);
+		pos += mark.size();
+		Register_Database db;
+		std::string addurl = db.GetDataS();
+		content.insert(pos, addurl);
+		respond.AddContent(content);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics_register_msg(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_register_msg.html");
+		std::string content = file.GetContent();
+		Register_Database db;
+		std::string addurl = db.GetDataOne(http.urlcontent, content);
+		respond.AddContent(addurl);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_statistics_prescription(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_prescription.html");
+		std::string content = file.GetContent();
+		std::string mark = "<!--insert_mark-->";
+		int pos = content.find(mark);
+		pos += mark.size();
+		Prescription_Database db;
+		std::string addurl = db.GetDataS();
+		content.insert(pos, addurl);
+		respond.AddContent(content);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+	int Router_statistics_prescription_msg(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/statistics_prescription_msg.html");
+		std::string content = file.GetContent();
+		Prescription_Database db;
+		std::string addurl = db.GetDataOne(http.urlcontent, content);
+		respond.AddContent(addurl);
 		file.SeverFile_close();
 		int res = respond.Send();
 		return res;

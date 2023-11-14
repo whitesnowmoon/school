@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title>手术管理</title>
+        </head>
+        <body>
+            <table align="center" border=" solid 2px">
+                <caption>手术管理</caption>
+                <tr>
+                    <td>患者姓名<input type="text" name="name" value="%s"></td>
+                    <td>患者年龄<input type="text" name="age" value="%s"></td>
+                    <td>主刀医生<input type="text" name="doctor" value="%s"></td>
+                    <td>手术地点<input type="text" name="addr" value="%s"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">开始时间<input type="text" name="time" value="%s"> </td>
+                </tr>
+                <tr>
+                    <td colspan="4" align="center">
+                        手术过程及所需仪器
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                       <Textarea style="width: 100%; height: 300px; box-sizing: border-box;" name="process">%s</Textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>医生助手1<input type="text" name="assistant1" value="%s"></td>
+                    <td>医生助手2<input type="text" name="assistant2" value="%s"></td>
+                    <td>医生助手3<input type="text" name="assistant3" value="%s"></td>
+                    <td>医生助手4<input type="text" name="assistant4" value="%s"></td>
+                </tr>
+            </table>
+        </body>
+    </html>

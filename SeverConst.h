@@ -16,7 +16,7 @@
                            "<a href=\"/drugreservation\" >仓库管理</a><br>"\
                            "<a href=\"web3.html\" >费用支出结算</a><br>"\
                            "<a href=\"web3.html\" >费用收入结算</a><br>"\
-                           "<a href=\"web3.html\" >医疗数据统计</a><br>"\
+                           "<a href=\"/statistics\" >医疗数据统计</a><br>"\
                            "<a href=\"web3.html\" >财务统计</a><br>"\
                            "<a href=\"/login_pwd\" >注册</a><br>"\
                            "<a href=\"/login\" >登录</a><br>"
@@ -78,6 +78,35 @@
                                     "<td><input type = \"text\" name=\"name\" value = \"%s\" readonly></td>                                    "\
                                     "<td><input type = \"text\" name=\"nursename\" value = \"%s\" readonly></td>                                    "\
                                     "<td><input type = \"text\" name=\"doctorname\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"submit\" value =\"详细信息\"></td>                                       "\
+                                    "</tr>                                                                                       "\
+                                    "</form>                                                                                     "
+
+#define STATISTICS_OP_FORM_HTML   u8"<form action=\"/statistics_operation_msg\" enctype=\"application/x-www-form-urlencoded\" method=\"post\">"\
+                                    "<tr>                                                                                        "\
+                                    "<td><input type = \"text\" name=\"name\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"doctor\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"time\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"submit\" value =\"详细信息\"></td>                                       "\
+                                    "</tr>                                                                                       "\
+                                    "</form>                                                                                     "
+
+
+#define STATISTICS_RE_FORM_HTML   u8"<form action=\"/statistics_register_msg\" enctype=\"application/x-www-form-urlencoded\" method=\"post\">"\
+                                    "<tr>                                                                                        "\
+                                    "<td><input type = \"text\" name=\"username\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"department\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"time\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"submit\" value =\"详细信息\"></td>                                       "\
+                                    "</tr>                                                                                       "\
+                                    "</form>                                                                                     "
+
+#define STATISTICS_PR_FORM_HTML   u8"<form action=\"/statistics_prescription_msg\" enctype=\"application/x-www-form-urlencoded\" method=\"post\">"\
+                                    "<tr>                                                                                        "\
+                                    "<td><input type = \"text\" name=\"name\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"department\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"doctorname\" value = \"%s\" readonly></td>                                    "\
+                                    "<td><input type = \"text\" name=\"time\" value = \"%s\" readonly></td>                                    "\
                                     "<td><input type = \"submit\" value =\"详细信息\"></td>                                       "\
                                     "</tr>                                                                                       "\
                                     "</form>                                                                                     "

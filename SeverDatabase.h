@@ -534,6 +534,52 @@ public:
 		sqlite3_finalize(stmt);
 		return 0;
 	}
+	std::string GetDataS() {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select name,doctor,time from operation", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			int Count = 1000;
+			while (SQLITE_ROW == sqlite3_step(stmt) && Count != 0) {
+				const char* format = STATISTICS_OP_FORM_HTML;
+				int sizestr = sprintf(buff, format,
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2)
+				);
+				_data_.append(buff, sizestr);
+				Count--;
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
+	std::string GetDataOne(std::map<std::string, std::string> data, std::string format) {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select * from operation where name=? and doctor=?", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_text(stmt, 2, data["doctor"].c_str(), data["doctor"].size(), NULL);
+			while (SQLITE_ROW == sqlite3_step(stmt)) {
+				int sizestr = sprintf(buff, format.c_str(),
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 9),
+					sqlite3_column_text(stmt, 7),
+					sqlite3_column_text(stmt, 8),
+					sqlite3_column_text(stmt, 3),
+					sqlite3_column_text(stmt, 4),
+					sqlite3_column_text(stmt, 5),
+					sqlite3_column_text(stmt, 6)
+				);
+				_data_.append(buff, sizestr);
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
 };
 
 
@@ -563,6 +609,52 @@ public:
 		sqlite3_finalize(stmt);
 		return 0;
 	}
+	std::string GetDataS() {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select name,hospitalname,doctorname,time from prescription", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			int Count = 1000;
+			while (SQLITE_ROW == sqlite3_step(stmt) && Count != 0) {
+				const char* format = STATISTICS_PR_FORM_HTML;
+				int sizestr = sprintf(buff, format,
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 3)
+				);
+				_data_.append(buff, sizestr);
+				Count--;
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
+	std::string GetDataOne(std::map<std::string, std::string> data, std::string format) {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select * from prescription where name=? and doctorname=?", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_text(stmt, 2, data["doctorname"].c_str(), data["doctorname"].size(), NULL);
+			while (SQLITE_ROW == sqlite3_step(stmt)) {
+				int sizestr = sprintf(buff, format.c_str(),
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 3),
+					sqlite3_column_text(stmt, 4),
+					sqlite3_column_text(stmt, 5),
+					sqlite3_column_text(stmt, 6),
+					sqlite3_column_text(stmt, 7),
+					sqlite3_column_text(stmt, 8)
+				);
+				_data_.append(buff, sizestr);
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
 };
 
 //register±í
@@ -589,6 +681,49 @@ public:
 		}
 		sqlite3_finalize(stmt);
 		return 0;
+	}
+	std::string GetDataS() {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select username,department,time from register  ORDER BY id DESC", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			int Count = 1000;
+			while (SQLITE_ROW == sqlite3_step(stmt) && Count != 0) {
+				const char* format = STATISTICS_RE_FORM_HTML;
+				int sizestr = sprintf(buff, format,
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2)
+				);
+				_data_.append(buff, sizestr);
+				Count--;
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
+	std::string GetDataOne(std::map<std::string, std::string> data, std::string format) {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select * from register where username=? and department=?", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["username"].c_str(), data["username"].size(), NULL);
+			sqlite3_bind_text(stmt, 2, data["department"].c_str(), data["department"].size(), NULL);
+			while (SQLITE_ROW == sqlite3_step(stmt)) {
+				int sizestr = sprintf(buff, format.c_str(),
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 5),
+					sqlite3_column_text(stmt, 3),
+					sqlite3_column_text(stmt, 4),
+					sqlite3_column_text(stmt, 6)
+				);
+				_data_.append(buff, sizestr);
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
 	}
 private:
 	long long time_str(std::string strTime) {
