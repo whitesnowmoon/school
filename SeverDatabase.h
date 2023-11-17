@@ -742,5 +742,82 @@ private:
 	}
 };
 
+//pay表
+class Pay_Database :public SeverDatabase
+{
+public:
+	int AddData(std::map<std::string, std::string> data) {    //正确返回0 错误-1
+		sqlite3_stmt* stmt;
+		int res = sqlite3_prepare(this->db, "insert into pay(name,pay,attr,data,service,number) values (?,?,?,?,?,?);", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_int(stmt, 2, std::atoi(data["pay"].c_str()));
+			sqlite3_bind_text(stmt, 3, data["attr"].c_str(), data["attr"].size(), NULL);
+			sqlite3_bind_text(stmt, 4, data["data"].c_str(), data["data"].size(), NULL);
+			sqlite3_bind_text(stmt, 5, data["service"].c_str(), data["service"].size(), NULL);
+			sqlite3_bind_int64(stmt, 6, time_str(data["data"].c_str()));
+			res = sqlite3_step(stmt);
+			if (res != SQLITE_DONE) {
+				sqlite3_finalize(stmt);
+				return -1;
+			}
+		}
+		sqlite3_finalize(stmt);
+		return 0;
+	}
+	std::string GetDataS() {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select name,pay,attr,data,service from pay ORDER BY number DESC", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			int Count = 1000;
+			while (SQLITE_ROW == sqlite3_step(stmt) && Count != 0) {
+				const char* format = PAY_FORM_HTML;
+				int sizestr = sprintf(buff, format,
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 3),
+					sqlite3_column_text(stmt, 4)
+				);
+				_data_.append(buff, sizestr);
+				Count--;
+			}
+		}
+		delete buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
+	std::string GetDataOne(std::map<std::string, std::string> data) {
+		sqlite3_stmt* stmt; int Count = 0; std::string _data_;  char* buff = new char[204800];
+		int res = sqlite3_prepare(this->db, "select * from pay where name=? and data=?", -1, &stmt, nullptr);
+		if (res == SQLITE_OK) {
+			sqlite3_bind_text(stmt, 1, data["name"].c_str(), data["name"].size(), NULL);
+			sqlite3_bind_text(stmt, 2, data["data"].c_str(), data["data"].size(), NULL);
+			int Count = 1000;
+			while (SQLITE_ROW == sqlite3_step(stmt) && Count != 0) {
+				const char* format = PAY_FORM_HTML;
+				int sizestr = sprintf(buff, format,
+					sqlite3_column_text(stmt, 0),
+					sqlite3_column_text(stmt, 1),
+					sqlite3_column_text(stmt, 2),
+					sqlite3_column_text(stmt, 3),
+					sqlite3_column_text(stmt, 4)
+				);
+				_data_.append(buff, sizestr);
+				Count--;
+			}
+		}
+		delete[] buff;
+		sqlite3_finalize(stmt);
+		return _data_;
+	}
+private:
+	long long time_str(std::string strTime) {
+		int year, month, day;
+		sscanf(strTime.c_str(), "%d-%d-%d", &year, &month, &day);
+		return year * 10000 + month * 100 + day;
+	}
+};
+
 #endif // !_SEVERDATABASE_H_
 

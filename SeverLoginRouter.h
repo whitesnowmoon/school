@@ -6,6 +6,102 @@
 #include"SeverDatabase.h"
 #include"SeverConst.h"
 #include<list>
+
+class SeverPay
+{
+public:
+	int next(SeverRequest& http, std::string cookie) {
+		if (http.url == "/pay" && http.method == "GET")//权限进入
+		{
+			return Router_pay(http);
+		}
+		if (http.url == "/pay_add" && http.method == "POST")//权限进入
+		{
+			return Router_pay_add(http);
+		}
+		if (http.url == "/pay_msg" && http.method == "GET")//权限进入
+		{
+			return Router_pay_all_msg(http);
+		}
+		if (http.url == "/pay_msg" && http.method == "POST")//权限进入
+		{
+			return Router_pay_msg(http);
+		}
+		//下一次开发从这里开始,开始具体业务处理   2023/11/17
+		//承接判断开始，会传入http, cookie，以无路径404结束
+		
+	}
+private:
+	int Router_pay_add(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		Pay_Database db;
+		if (db.AddData(http.urlcontent) == 0) {
+			respond.AddContent("inputin");
+		}
+		else
+		{
+			respond.AddContent("error!");
+		}
+		int res = respond.Send();
+		return res;
+	}
+	int Router_pay(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/pay.html");
+		respond.AddContent(file.GetContent());
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_pay_all_msg(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/pay_msg.html");
+		std::string content = file.GetContent();
+		std::string mark = "<!--insert_mark-->";
+		int pos = content.find(mark);
+		pos += mark.size();
+		Pay_Database db;
+		std::string addurl = db.GetDataS();
+		content.insert(pos, addurl);
+		respond.AddContent(content);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+
+	int Router_pay_msg(SeverRequest& http) {
+		SeverRespond respond(http.httpIterator);
+		respond.protocol = http.protocol;
+		respond.state = "200";
+		respond.statecode = respond.StateMap["200"];
+		SeverFile file;
+		file.SeverFile_open("form/pay_msg.html");
+		std::string content = file.GetContent();
+		std::string mark = "<!--insert_mark-->";
+		int pos = content.find(mark);
+		pos += mark.size();
+		Pay_Database db;
+		std::string addurl = db.GetDataOne(http.urlcontent);
+		content.insert(pos, addurl);
+		respond.AddContent(content);
+		file.SeverFile_close();
+		int res = respond.Send();
+		return res;
+	}
+};
+
 class SeverRegister
 {
 public:
@@ -49,6 +145,8 @@ public:
 		}
 		//下一次开发从这里开始,开始具体业务处理   2023/11/13
 		//承接判断开始，会传入http, cookie，以无路径404结束
+		SeverPay pay;
+		pay.next(http, cookie);
 	}
 private:
 	int Router_register_add(SeverRequest& http) {

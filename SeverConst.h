@@ -14,10 +14,9 @@
                            "<a href=\"/drugin\" >药物发放</a><br>"\
                            "<a href=\"/drugout\" >药物采购</a><br>"\
                            "<a href=\"/drugreservation\" >仓库管理</a><br>"\
-                           "<a href=\"web3.html\" >费用支出结算</a><br>"\
-                           "<a href=\"web3.html\" >费用收入结算</a><br>"\
+                           "<a href=\"/pay_msg\" >费用收支表</a><br>"\
+                           "<a href=\"/pay\" >费用收支</a><br>"\
                            "<a href=\"/statistics\" >医疗数据统计</a><br>"\
-                           "<a href=\"web3.html\" >财务统计</a><br>"\
                            "<a href=\"/login_pwd\" >注册</a><br>"\
                            "<a href=\"/login\" >登录</a><br>"
 
@@ -110,6 +109,15 @@
                                     "<td><input type = \"submit\" value =\"详细信息\"></td>                                       "\
                                     "</tr>                                                                                       "\
                                     "</form>                                                                                     "
+
+
+#define PAY_FORM_HTML       u8" <tr>"\
+                              " <td><input type = \"text\" value = \"%s\" readonly></td>"\
+                              " <td><input type = \"text\" value = \"%s\" readonly></td>"\
+                              " <td><input type = \"text\" value = \"%s\" readonly></td>"\
+                              " <td><input type = \"text\" value = \"%s\" readonly></td>"\
+                              " <td><input type = \"text\" value = \"%s\" readonly></td>"\
+                              " </tr>"
 
 
 #endif // !_SEVERCONST_H_
